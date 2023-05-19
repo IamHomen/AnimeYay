@@ -173,9 +173,9 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
         
         
         for (const anime of data) {
-            message += `Title: ${anime.animeTitle}\n`;
+            message += `Title: <b>${anime.animeTitle}</b>\n`;
             message += `Status: ${anime.status}\n`;
-            message += `ANIME ID: ${anime.animeId}\n\n`;
+            message += `ANIME ID: <b>${anime.animeId}</b>\n\n`;
         }
   
         if (data.length === 0) {
@@ -198,7 +198,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
         
         
         for (const anime of data) {
-            message += `Episode Id: ${anime.episodeId}\n`;
+            message += `Episode Id: <b>${anime.episodeId}</b>\n`;
             message += `Episode Number: ${anime.episodeNum}\n\n`;
         }
   
@@ -214,5 +214,5 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
 
 bot.onText(/\/guide/, (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, '*What this bot can do?*\n\n /guide <shows list of commands>\n /search <keyword><Search Anime Title>\n /episodes <Show List Of Episodes of given AnimeId>\n');
+  bot.sendMessage(chatId, '<b>What this bot can do?</b>\n\n /guide <shows list of commands>\n /search <keyword><Search Anime Title>\n /episodes <Show List Of Episodes of given AnimeId>\n');
 });
