@@ -287,7 +287,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
   const chatId = msg.chat.id;
   const id = match[1];
   try {
-    const data = await scrapeMp4({ id: id });
+    const data = await scrapeMP4({ id: id });
     let message = '';
         
         
