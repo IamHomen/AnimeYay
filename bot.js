@@ -154,7 +154,7 @@ export const scrapeMP4 = async({ sources = [], id }) => {
         if (!res.source) return { error: 'No sources found!! Try different source.' };
 
         res.source.forEach((source) => sources.push(source));
-        return sources: sources;
+        return sources;
     } catch (err) {
         return { error: err };
     }
