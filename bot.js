@@ -117,9 +117,8 @@ app.get('/watch/:id', async(req, res) => {
     }
 });
 
-const scrapeMP4 = async({ sources = [], id }) => {
+const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
     try {
-        let epPage, server, $, serverUrl;
 
         if (id) {
             epPage = await axios.get(BASE_URL2 + id);
