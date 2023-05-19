@@ -117,7 +117,7 @@ app.get('/watch/:id', async(req, res) => {
     }
 });
 
-export const scrapeMP4 = async({ sources = [], id }) => {
+const scrapeMP4 = async({ sources = [], id }) => {
     try {
         let epPage, server, $, serverUrl;
 
