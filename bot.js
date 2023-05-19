@@ -152,8 +152,7 @@ const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
 
         if (!res.source) return { error: 'No sources found!! Try different source.' };
 
-        res.source.forEach((source) => sources.push(source));
-        return sources;
+        return res.source;
     } catch (err) {
         return { error: err };
     }
@@ -290,7 +289,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
     let message = '';
         
         for (const anime of data) {
-            message += `${anime.sources}`;
+            message += `${anime.res}`;
   }
         if (data.length === 0) {
             message = 'No results found.';
