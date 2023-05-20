@@ -349,7 +349,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             for (const source of data.sources[0].file) {
 
-                message += `${source}\n`;
+                message += `${source}`;
 
             }
 
@@ -357,7 +357,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             for (const source of data.sources_bk[0].file) {
 
-                message += `${source}\n`;
+                message += `${source}`;
 
             }
 
