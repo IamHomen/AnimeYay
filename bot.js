@@ -285,9 +285,9 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
         
         
         for (const anime of data) {
-            message += `Title: ${anime.animeTitle}\n`;
+            message += `Title: <pre><b>${anime.animeTitle}</b></pre>\n`;
             message += `Status: ${anime.status}\n`;
-            message += `ANIME ID: <pre>${anime.animeId}</pre>\n\n`;
+            message += `ANIME ID: <pre><b>${anime.animeId}</b></pre>\n\n`;
         }
   
         if (data.length === 0) {
@@ -310,7 +310,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
         
         
         for (const anime of data) {
-            message += `Episode Id: <pre>${anime.episodeId}</pre>\n`;
+            message += `Episode Id: <pre><b>${anime.episodeId}</b></pre>\n`;
             message += `Episode: ${anime.episodeNum}\n\n`;
         }
   
