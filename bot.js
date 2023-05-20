@@ -154,11 +154,9 @@ const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
 
         sources = res.source; // Update the sources variable with the response
 
-        return {
+        return sources;
 
-            sources,
 
-        };
     } catch (err) {
         return { error: err };
     }
@@ -294,9 +292,8 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
     const data = await scrapeMP4({ id: id });
     let message = '';
         
-        for (const source of data) {
             message += `${source}\n`;
-  }
+
         if (data.length === 0) {
             message = 'No results found.';
         }
