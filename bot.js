@@ -152,10 +152,20 @@ const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
 
         if (!res.source) return { error: 'No sources found!! Try different source.' };
 
-       sources.push(res.source); // Update the sources variable with the response
 
-        return sources;
+        res.source.forEach((source) => sources.push(source));
 
+        res.source_bk.forEach((source) => sources_bk.push(source));
+
+        return {
+
+            Referer: serverUrl.href,
+
+            sources: sources,
+
+            sources_bk: sources_bk,
+
+        };
 
     } catch (err) {
         return { error: err };
