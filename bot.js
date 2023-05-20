@@ -352,7 +352,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
             for (const source of data.sources[0].file) {
             
                 
-             message += `${source}`;
+             message += `${nan}${source}`;
 
             }
 
@@ -360,7 +360,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             for (const source of data.sources_bk[0].file) {
 
-                message += `${source}`;
+                message += `${source}\n`;
 
             }
             message += `Proxy for Bypass Access Denied:\n ${nan}`;
