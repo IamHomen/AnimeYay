@@ -151,21 +151,10 @@ const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
         const res = decryptEncryptAjaxResponse(fetchRes.data);
 
         if (!res.source) return { error: 'No sources found!! Try different source.' };
+      
+        const sourceFile = sourceData.source[0].file;
 
-
-        res.source.forEach((source) => sources.push(source));
-
-        res.source_bk.forEach((source) => sources_bk.push(source));
-
-        return {
-
-            Referer: serverUrl.href,
-
-            sources: sources,
-
-            sources_bk: sources_bk,
-
-        };
+        return sourceFile;
 
     } catch (err) {
         return { error: err };
@@ -313,7 +302,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             let message = 'Episode Sources:\n\n';
 
-            for (const source of data.sources) {
+            for (const source of data.sourceFile) {
 
                 message += `Source: ${source}\n`;
 
