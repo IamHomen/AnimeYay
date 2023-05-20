@@ -360,11 +360,11 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             for (const source of data.sources_bk[0].file) {
 
-                message += `${source}\n`;
+                message += `${source}`;
 
             }
-            message += `Proxy for Bypass Access Denied:\n ${nan}`;
-            message += 'How to use Proxy?\n just combine Proxy Url first then sources url.';
+            message += `\nProxy for Bypass Access Denied:\n ${nan}`;
+            message += '\n\nHow to use Proxy?\n just combine Proxy Url first then sources url.';
             bot.sendMessage(chatId, message);
 
         }
