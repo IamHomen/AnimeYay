@@ -125,7 +125,7 @@ const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
             $ = cheerio.load(epPage.data);
 
             server = $('#load_anime > div > div > iframe').attr('src');
-            serverUrl = new URL('https:' + server);
+            serverUrl = new URL(server);
         } else throw Error("Episode id not found")
 
         const goGoServerPage = await axios.get(serverUrl.href, {
