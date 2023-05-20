@@ -33,6 +33,8 @@ const Referer = 'https://gogoplay.io/';
 const goload_stream_url = 'https://goload.pro/streaming.php';
 export const DownloadReferer = 'https://goload.pro/';
 
+const nan = 'https://m3u8-proxy-cors-sable.vercel.app/cors?url=';
+
 const disqus_iframe = (episodeId) =>
     `https://disqus.com/embed/comments/?base=default&f=gogoanimetv&t_u=https%3A%2F%2Fgogoanime.vc%2F${episodeId}&s_o=default#version=cfefa856cbcd7efb87102e7242c9a829`;
 const disqus_api = (threadId, page) =>
@@ -361,12 +363,12 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
                 message += `${source}`;
 
             }
-            message += `Proxy for Bypass Access Denied:\n ${proxy}`;
+            message += `Proxy for Bypass Access Denied:\n ${nan}`;
             bot.sendMessage(chatId, message);
 
         }
 
-    } catch (err) {
+    } catch (err) {po
 
         console.error(err);
 
