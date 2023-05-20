@@ -347,7 +347,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             message += 'Sources:\n';
 
-            for (const source of data.sources) {
+            for (const source of data.sources[0].file) {
 
                 message += `${source}\n`;
 
@@ -355,7 +355,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             message += 'Backup Sources:\n';
 
-            for (const source of data.sources_bk) {
+            for (const source of data.sources_bk[0].file) {
 
                 message += `${source}\n`;
 
