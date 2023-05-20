@@ -353,7 +353,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             }
 
-            message += 'Backup Sources:\n';
+            message += ' \nBackup Sources:\n';
 
             for (const source of data.sources_bk[0].file) {
 
