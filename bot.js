@@ -348,8 +348,8 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
             message += 'Sources:\n';
 
             for (const source of data.sources[0].file) {
-
-                message += `https://m3u8-proxy-cors-sable.vercel.app/cors?url=${source}`;
+const proxy = 'https://m3u8-proxy-cors-sable.vercel.app/cors?url='
+                message += `${proxy}${source}`;
 
             }
 
@@ -357,7 +357,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             for (const source of data.sources_bk[0].file) {
 
-                message += `https://m3u8-proxy-cors-sable.vercel.app/cors?url=${source}`;
+                message += `${proxy}${source}`;
 
             }
 
