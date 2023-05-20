@@ -292,7 +292,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
     const data = await scrapeMP4({ id: id });
     let message = '';
         
-            message += `${source}\n`;
+            message += `${sources}\n`;
 
         if (data.length === 0) {
             message = 'No results found.';
