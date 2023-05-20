@@ -268,7 +268,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
   const chatId = msg.chat.id;
   const id = match[1];
   try {
-    const data = await scrapeAnimeDetails({ id: id });
+    const data = await scrapeAnimeEpisodes({ id: id });
     let message = '';
         
         
