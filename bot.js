@@ -37,7 +37,7 @@ const disqus_iframe = (episodeId) =>
     `https://disqus.com/embed/comments/?base=default&f=gogoanimetv&t_u=https%3A%2F%2Fgogoanime.vc%2F${episodeId}&s_o=default#version=cfefa856cbcd7efb87102e7242c9a829`;
 const disqus_api = (threadId, page) =>
     `https://disqus.com/api/3.0/threads/listPostsThreaded?limit=100&thread=${threadId}&forum=gogoanimetv&order=popular&cursor=${page}:0:0&api_key=E8Uh5l5fHZ6gD8U3KycjAIAk46f68Zw7C6eW8WSjZvCLXebZ7p0r1yrYDrLilk2F`;
-
+const non = 'https://m3u8-proxy-cors-sable.vercel.app/cors?url=';
 
 
 
@@ -348,8 +348,9 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
             message += 'Sources:\n';
 
             for (const source of data.sources[0].file) {
-const proxy = 'https://m3u8-proxy-cors-sable.vercel.app/cors?url='
-                message += `${proxy}${source}`;
+            
+                
+             message += `${non}${source}`;
 
             }
 
@@ -357,7 +358,7 @@ const proxy = 'https://m3u8-proxy-cors-sable.vercel.app/cors?url='
 
             for (const source of data.sources_bk[0].file) {
 
-                message += `${proxy}${source}`;
+                message += `${non}${source}`;
 
             }
 
