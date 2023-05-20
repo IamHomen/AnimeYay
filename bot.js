@@ -286,22 +286,40 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
 });
 
 bot.onText(/\/watch (.+)/, async (msg, match) => {
-  const chatId = msg.chat.id;
-  const id = match[1];
-  try {
-    const data = await scrapeMP4({ id: id });
-    let message = '';
-        
-            message += `${sources}\n`;
 
-        if (data.length === 0) {
-            message = 'No results found.';
+    const chatId = msg.chat.id;
+
+    const episodeId = match[1];
+
+    try {
+
+        const data = await scrapeMP4({ id: episodeId });
+
+        if (data.error) {
+
+            bot.sendMessage(chatId, 'An error occurred while retrieving the episode sources.');
+
+        } else {
+
+            let message = 'Episode Sources:\n\n';
+
+            for (const source of data.sources) {
+
+                message += `Source: ${source}\n`;
+
+            }
+
+            bot.sendMessage(chatId, message);
+
         }
-  
-        bot.sendMessage(chatId, message);
-  } catch (err) {
-    bot.sendMessage(chatId, 'Error: ' + err);
-  }
+
+    } catch (err) {
+
+        console.error(err);
+
+        bot.sendMessage(chatId, 'An error occurred while retrieving the episode sources.');
+
+    }
 });
 
 bot.onText(/\/guide/, (msg) => {
