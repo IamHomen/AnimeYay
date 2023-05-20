@@ -287,14 +287,14 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
         for (const anime of data) {
             message += `Title: ${anime.animeTitle}\n`;
             message += `Status: ${anime.status}\n`;
-            message += `ANIME ID: ${anime.animeId}\n\n`;
+            message += `ANIME ID: <pre>${anime.animeId}</pre>\n\n`;
         }
   
         if (data.length === 0) {
             message = 'No results found.';
         }
   
-        bot.sendMessage(chatId, message);
+        bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
     } catch (err) {
         console.error(err);
         bot.sendMessage(chatId, 'An error occurred while searching for anime.');
@@ -310,7 +310,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
         
         
         for (const anime of data) {
-            message += `Episode Id: ${anime.episodeId}\n`;
+            message += `Episode Id: <pre>${anime.episodeId}</pre>\n`;
             message += `Episode: ${anime.episodeNum}\n\n`;
         }
   
@@ -318,7 +318,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
             message = 'No results found.';
         }
   
-        bot.sendMessage(chatId, message);
+        bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
   } catch (err) {
     bot.sendMessage(chatId, 'Error: ' + err);
   }
@@ -365,7 +365,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
             }
             message += `\n Proxy for Bypass Access Denied:\n ${nan}`;
             message += '\n\n <b>How to use Proxy?</b>\n Just combine Proxy Url first then sources url.\n\n Example:\n https://m3u8-proxy-cors-sable.vercel.app/cors?url=https://www019.vipanicdn.net/streamhls/f5db347daf6fb913be2ca2246601a935/ep.2.1677663806.m3u8';
-            bot.sendMessage(chatId, message);
+            bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
 
         }
 
