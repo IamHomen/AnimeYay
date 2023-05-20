@@ -117,48 +117,86 @@ app.get('/watch/:id', async(req, res) => {
     }
 });
 
-const scrapeMP4 = async({ sources = [], epPage, server, $, serverUrl, id }) => {
+const scrapeMP4 = async({ id }) => {
+
+    let sources = [];
+
+    let sources_bk = [];
+
     try {
 
+        let epPage, server, $, serverUrl;
+
         if (id) {
+
             epPage = await axios.get(BASE_URL2 + id);
+
             $ = cheerio.load(epPage.data);
 
             server = $('#load_anime > div > div > iframe').attr('src');
+
             serverUrl = new URL(server);
+
         } else throw Error("Episode id not found")
 
         const goGoServerPage = await axios.get(serverUrl.href, {
+
             headers: { 'User-Agent': USER_AGENT },
+
         });
+
         const $$ = cheerio.load(goGoServerPage.data);
 
         const params = await generateEncryptAjaxParameters(
+
             $$,
+
             serverUrl.searchParams.get('id')
+
         );
 
         const fetchRes = await axios.get(
+
             `
+
         ${serverUrl.protocol}//${serverUrl.hostname}/encrypt-ajax.php?${params}`, {
+
                 headers: {
+
                     'User-Agent': USER_AGENT,
+
                     'X-Requested-With': 'XMLHttpRequest',
+
                 },
+
             }
+
         );
 
         const res = decryptEncryptAjaxResponse(fetchRes.data);
 
         if (!res.source) return { error: 'No sources found!! Try different source.' };
-      
-        const sourceFile = sourceData.source[0].file;
 
-        return sourceFile;
+        res.source.forEach((source) => sources.push(source));
+
+        res.source_bk.forEach((source) => sources_bk.push(source));
+
+        return {
+
+            Referer: serverUrl.href,
+
+            sources: sources,
+
+            sources_bk: sources_bk,
+
+        };
 
     } catch (err) {
+
         return { error: err };
+
     }
+
 };
 
 
@@ -284,6 +322,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
   }
 });
 
+
 bot.onText(/\/watch (.+)/, async (msg, match) => {
 
     const chatId = msg.chat.id;
@@ -296,15 +335,29 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
         if (data.error) {
 
-            bot.sendMessage(chatId, 'An error occurred while retrieving the episode sources.');
+            bot.sendMessage(chatId, `An error occurred: ${data.error}`);
 
         } else {
 
-            let message = 'Episode Sources:\n\n';
+            // Format the data into a readable message
 
-            for (const source of data.sourceFile) {
+            let message = 'MP4 Sources:\n\n';
 
-                message += `Source: ${source}\n`;
+            message += `Referer: ${data.Referer}\n`;
+
+            message += 'Sources:\n';
+
+            for (const source of data.sources) {
+
+                message += `${source}\n`;
+
+            }
+
+            message += 'Backup Sources:\n';
+
+            for (const source of data.sources_bk) {
+
+                message += `${source}\n`;
 
             }
 
@@ -316,10 +369,12 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
         console.error(err);
 
-        bot.sendMessage(chatId, 'An error occurred while retrieving the episode sources.');
+        bot.sendMessage(chatId, 'An error occurred while scraping MP4 sources.');
 
     }
+
 });
+
 
 bot.onText(/\/guide/, (msg) => {
   const chatId = msg.chat.id;
