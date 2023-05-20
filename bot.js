@@ -364,7 +364,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
             }
             message += `\nProxy for Bypass Access Denied:\n ${nan}`;
-            message += '\n\nHow to use Proxy?\n just combine Proxy Url first then sources url.';
+            message += '\n\nHow to use Proxy?\n just combine Proxy Url first then sources url.\n\n Example:\n\n https://m3u8-proxy-cors-sable.vercel.app/cors?url=https://www019.vipanicdn.net/streamhls/f5db347daf6fb913be2ca2246601a935/ep.2.1677663806.m3u8';
             bot.sendMessage(chatId, message);
 
         }
