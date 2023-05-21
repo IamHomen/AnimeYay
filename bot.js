@@ -634,7 +634,7 @@ bot.onText(/\/download (.+)/, async (msg, match) => {
 
     });
 
-    bot.sendMessage(msg.chat.id, response);
+    bot.sendMessage(msg.chat.id, response, { parse_mode: 'HTML' });
 
   } catch (error) {
 
