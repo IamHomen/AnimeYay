@@ -625,20 +625,20 @@ bot.onText(/\/download (.+)/, async (msg, match) => {
   try {
 
     const links = await scrapeDownload({ id: episodeId });
-
-    let response = '';
+    const chatId = msg.chat.id;
+    let response = 'Download Links\n\n';
     
     links.forEach(link => {
 
-      response += `<a href"${link.href}">${link.text}</a>\n`;
+      response += `<a href="${link.href}">${link.text}</a>\n`;
 
     });
 
-    bot.sendMessage(msg.chat.id, response, { parse_mode: 'HTML' });
+    bot.sendMessage(chatId, response, { parse_mode: 'HTML' });
 
   } catch (error) {
 
-    bot.sendMessage(msg.chat.id, 'Failed to fetch download links');
+    bot.sendMessage(chatId, 'Failed to fetch download links');
 
   }
 
