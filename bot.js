@@ -431,7 +431,7 @@ let page = '';
 
     try {
 
-        const data = await scrapeSearch({ keyw: searchTerm, page: page });
+        const data2 = await scrapeSearch({ keyw: searchTerm, page: page });
 
   
 
@@ -443,7 +443,7 @@ let page = '';
 
         
 
-        for (const anime of data) {
+        for (const anime of data2) {
 
             message += `Title: <pre><b>${anime.animeTitle}</b></pre>\n`;
 
@@ -455,7 +455,7 @@ let page = '';
 
   
 
-        if (data.length === 0) {
+        if (data2.length === 0) {
 
             message = 'No results found.';
 
