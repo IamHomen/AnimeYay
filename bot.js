@@ -618,20 +618,23 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
 });
 
-
 bot.onText(/\/download (.+)/, async (msg, match) => {
-const chatId = msg.chat.id;
-  const episodeId = match[1];
 
-  
+  const episodeId = match[1];
 
   try {
 
     const links = await scrapeDownload({ id: episodeId });
 
-    const response = links.map(link => `${link.text}:\n ${link.href}\n\n`);
+    let response = '';
+    
+    links.forEach(link => {
 
-    bot.sendMessage(chatId, response);
+      response += `${link.text}\n${link.href}\n\n`;
+
+    });
+
+    bot.sendMessage(msg.chat.id, response);
 
   } catch (error) {
 
