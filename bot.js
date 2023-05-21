@@ -345,10 +345,10 @@ bot.on('callback_query', (query) => {
 
   const chatId = query.message.chat.id;
 
-  const data = query.data;
+  const data1= query.data;
 let page = '';
     let searchTerm ='';
-    const values = data.split(':');
+    const values = data1.split(':');
 
 
 
