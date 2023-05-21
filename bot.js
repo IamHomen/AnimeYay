@@ -277,24 +277,7 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
     const searchTerm = match[1];
     const page = 1; // Specify the desired page number
   
-    const keyboard = {
 
-    inline_keyboard: [
-
-      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
-
-      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
-      
-      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
-
-      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
-      
-      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
-
-
-    ],
-
-  };
     
     try {
         const data = await scrapeSearch({ keyw: searchTerm, page: page });
@@ -313,26 +296,7 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
             message = 'No results found.';
         }
   
-        bot.sendMessage(chatId, message, {
-
-  parse_mode: 'HTML',
-
-  reply_markup: {
-
-    inline_keyboard: [
-
-      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
-
-      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
-       
-      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
-      
-      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
-        
-      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
-    ],
-
-  },
+        bot.sendMessage(chatId, message, { parse_mode: 'HTML'
 
 });
     } catch (err) {
@@ -341,7 +305,7 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
     }
 });
 
-bot.on('callback_query', (query) => {
+/**bot.on('callback_query', (query) => {
 
   const chatId = query.message.chat.id;
 
@@ -503,7 +467,7 @@ let page = '';
 
   bot.answerCallbackQuery(query.id);
 
-});
+});**/
 
 bot.onText(/\/episodes (.+)/, async (msg, match) => {
   const chatId = msg.chat.id;
