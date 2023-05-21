@@ -194,6 +194,89 @@ const scrapeMP4 = async({ id }) => {
 
 /**SCRAPE MP4 END **/
 
+/** START SCRAPE DOWNLOAD LINKS **/
+
+app.get('/download/:id', async(req, res) => {
+
+    try {
+
+        const id = req.params.id;
+
+        const data = await scrapeMP4({ id: id });
+
+        res.status(200).json(data);
+
+    } catch (err) {
+
+        res.status(500).json({
+
+            status: 500,
+
+            error: 'Internal Error',
+
+            message: err,
+
+        });
+
+    }
+
+});
+
+const scrapeDownload = async ({ id }) => {
+
+  if (id) {
+
+    try {
+
+      const cookies = '0BkG3DL6fOPr9i5Baou7v3fDvBLQ05wcjkp%2Fv%2FlMXfLXcglPVrlEG0dlNMQ%2Fl%2BrWaUm5UF6ebQSIfNMWvJrDDQ%3D%3D';
+
+      const dlPage = await axios.get(`${BASE_URL}${id}`, {
+
+        headers: {
+
+          'Cookie': cookies,
+
+          'User-Agent': USER_AGENT,
+
+        }
+
+      });
+
+      const $ = cheerio.load(dlPage.data);
+
+      let links = [];
+
+      $('.list_dowload a').each((index, element) => {
+
+        const href = $(element).attr('href');
+
+        const text = $(element).text();
+
+        links.push({ href, text });
+
+      });
+
+      return links;
+
+    } catch (error) {
+
+      throw new Error('Failed to fetch download links');
+
+    }
+
+  } else {
+
+    throw new Error('Episode ID not found');
+
+  }
+
+};
+
+
+
+
+  
+/** END SCRAPE DOWNLOAD LINKS **/
 
 app.get('/episodes/:id', async(req, res) => {
     try {
@@ -535,6 +618,28 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
 });
 
+
+bot.onText(/\/download (.+)/, async (msg, match) => {
+const chatId = msg.chat.id;
+  const episodeId = match[1];
+
+  
+
+  try {
+
+    const links = await scrapeDownload({ id: episodeId });
+
+    const response = links.map(link => `${link.text}: ${link.href}`).join('\n');
+
+    bot.sendMessage(chatId, response);
+
+  } catch (error) {
+
+    bot.sendMessage(msg.chat.id, 'Failed to fetch download links');
+
+  }
+
+});
 
 bot.onText(/\/guide/, (msg) => {
   const chatId = msg.chat.id;
