@@ -272,10 +272,10 @@ bot.onText(/\/start/, (msg) => {
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
 });
 
-bot.onText(/\/search (.+)/, async (msg, match) => {
+bot.onText(/\/search (.+?) (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
     const searchTerm = match[1];
-    const page = 1; // Specify the desired page number
+    const page = match[2]; // Specify the desired page number
   
 
     
