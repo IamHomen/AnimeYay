@@ -5,7 +5,7 @@ import cheerio from 'cheerio';
 import TelegramBot from 'node-telegram-bot-api';
 
 const port = process.env.PORT || 3000;
-const botToken = '5819280302:AAG_Yjb35C6YBXfmL8bExOhEktjY_pSidj4'; // Replace with your Telegram bot token
+const botToken = '6114264487:AAFURVqH-ryQf_Dan9orrZ26oqSvlth9jBg'; // Replace with your Telegram bot token
 
 
 import {
