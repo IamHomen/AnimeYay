@@ -281,15 +281,15 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
 
     inline_keyboard: [
 
-      [{ text: 'Page 1', callback_data: '1' }],
+      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
 
-      [{ text: 'Page 2', callback_data: '2' }],
+      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
       
-      [{ text: 'Page 3', callback_data: '3' }],
+      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
 
-      [{ text: 'Page 4', callback_data: '4' }],
+      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
       
-      [{ text: 'Page 5', callback_data: '5' }],
+      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
 
 
     ],
@@ -321,15 +321,15 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
 
     inline_keyboard: [
 
-      [{ text: 'Page 1', callback_data: '1' }],
+      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
 
-      [{ text: 'Page 2', callback_data: '2' }],
+      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
        
-      [{ text: 'Page 3', callback_data: '3' }],
+      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
       
-      [{ text: 'Page 4', callback_data: '4' }],
+      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
         
-      [{ text: 'Page 5', callback_data: '5' }],
+      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
     ],
 
   },
@@ -346,38 +346,56 @@ bot.on('callback_query', (query) => {
   const chatId = query.message.chat.id;
 
   const data = query.data;
+let page = '';
+    let searchTerm ='';
+    const values = data.split(':');
 
+
+
+// Access the individual values
+
+  const value1 = values[0];
+
+  const value2 = values[1];
+    
   // Handle different button callbacks
 
-  switch (data) {
+  switch (value1) {
 
     case '1':
 
-      bot.sendMessage(chatId, 'Button 1 clicked');
+      page = `${value1}`;
+      searchTerm = `${value2}`;
 
       break;
 
     case '2':
 
-      bot.sendMessage(chatId, 'Button 2 clicked');
+      page = `${value1}`;
+
+      searchTerm = `${value2}`;
 
       break;
      
     case '3':
 
-      bot.sendMessage(chatId, 'Button 1 clicked');
+      page = `${value1}`;
+      searchTerm = `${value2}`;
 
       break;
     
     case '4':
 
-      bot.sendMessage(chatId, 'Button 1 clicked');
+      page = `${value1}`;
+      searchTerm = `${value2}`;
 
       break;
           
     case '5':
 
-      bot.sendMessage(chatId, 'Button 1 clicked');
+      page = `${value1}`;
+
+      searchTerm = `${value2}`;
 
       break;
 
@@ -387,6 +405,100 @@ bot.on('callback_query', (query) => {
 
   }
 
+    const keyboard = {
+
+    inline_keyboard: [
+
+      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
+
+      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
+
+      
+
+      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
+
+      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
+
+      
+
+      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
+
+    ],
+
+  };
+
+    
+
+    try {
+
+        const data = await scrapeSearch({ keyw: searchTerm, page: page });
+
+  
+
+        // Format the data into a readable message
+
+        let message = 'Search Result:\n\n ';
+
+        
+
+        
+
+        for (const anime of data) {
+
+            message += `Title: <pre><b>${anime.animeTitle}</b></pre>\n`;
+
+            message += `Status: ${anime.status}\n`;
+
+            message += `ANIME ID: <pre><b>${anime.animeId}</b></pre>\n\n`;
+
+        }
+
+  
+
+        if (data.length === 0) {
+
+            message = 'No results found.';
+
+        }
+
+  
+
+        bot.sendMessage(chatId, message, {
+
+  parse_mode: 'HTML',
+
+  reply_markup: {
+
+    inline_keyboard: [
+
+      [{ text: 'Page 1', callback_data: `1:${searchTerm}` }],
+
+      [{ text: 'Page 2', callback_data: `2:${searchTerm}` }],
+
+       
+
+      [{ text: 'Page 3', callback_data: `3:${searchTerm}` }],
+
+      
+
+      [{ text: 'Page 4', callback_data: `4:${searchTerm}` }],
+
+        
+
+      [{ text: 'Page 5', callback_data: `5:${searchTerm}` }],
+
+    ],
+
+  },
+            });
+
+    } catch (err) {
+
+        console.error(err);
+
+        bot.sendMessage(chatId, 'An error occurred while searching for anime.');
+
+    }
   // Answer the button callback
 
   bot.answerCallbackQuery(query.id);
