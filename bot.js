@@ -281,7 +281,7 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
         const data = await scrapeSearch({ keyw: searchTerm, page: page });
   
         // Format the data into a readable message
-        let message = '';
+        let message = 'Search Result:\n\n ';
         
         
         for (const anime of data) {
@@ -306,7 +306,7 @@ bot.onText(/\/episodes (.+)/, async (msg, match) => {
   const id = match[1];
   try {
     const data = await scrapeAnimeEpisodes({ id: id });
-    let message = '';
+    let message = 'Episode List:\n\n ';
         
         
         for (const anime of data) {
