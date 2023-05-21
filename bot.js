@@ -267,7 +267,7 @@ app.listen(port, () => {
 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
-    const message = 'Welcome to the AnimeYay bot! Here's some guide to get you started.\n\n /search <Keyword> Search your favorite Anime By Title\n /episodes <AnimeId> Enter AnimeId to show list of episodes of that anime.\n /watch <episodeId> enter episodeId to show video url to watch.\n\n <b>Recommended Video Players to Use</b>\n\n 1. MXPlayer\n 2. VLC For Android';
+    const message = 'Welcome to the AnimeYay bot! Here is some guide to get you started.\n\n /search <Keyword> Search your favorite Anime By Title\n /episodes <AnimeId> Enter AnimeId to show list of episodes of that anime.\n /watch <episodeId> enter episodeId to show video url to watch.\n\n <b>Recommended Video Players to Use</b>\n\n 1. MXPlayer\n 2. VLC For Android';
   
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
 });
