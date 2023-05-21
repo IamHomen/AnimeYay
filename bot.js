@@ -313,7 +313,28 @@ bot.onText(/\/search (.+)/, async (msg, match) => {
             message = 'No results found.';
         }
   
-        bot.sendMessage(chatId, message, { parse_mode: 'HTML' }, { reply_markup: keyboard });
+        bot.sendMessage(chatId, message, {
+
+  parse_mode: 'HTML',
+
+  reply_markup: {
+
+    inline_keyboard: [
+
+      [{ text: 'Page 1', callback_data: '1' }],
+
+      [{ text: 'Page 2', callback_data: '2' }],
+       
+      [{ text: 'Page 3', callback_data: '3' }],
+      
+      [{ text: 'Page 4', callback_data: '4' }],
+        
+      [{ text: 'Page 5', callback_data: '5' }],
+    ],
+
+  },
+
+});
     } catch (err) {
         console.error(err);
         bot.sendMessage(chatId, 'An error occurred while searching for anime.');
