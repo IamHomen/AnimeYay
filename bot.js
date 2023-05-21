@@ -228,7 +228,7 @@ const scrapeDownload = async ({ id }) => {
 
     try {
 
-      const cookies = '0BkG3DL6fOPr9i5Baou7v3fDvBLQ05wcjkp%2Fv%2FlMXfLXcglPVrlEG0dlNMQ%2Fl%2BrWaUm5UF6ebQSIfNMWvJrDDQ%3D%3D';
+      const cookies = 'gogoanime=aghj610ve2ee7jl4bgtlflag45; _ga=GA1.2.2113900711.1684408795; _sharedid=a8a3b8bd-8cc5-4551-9ef9-18ad145afc70; dsq__=435tq7fe8c6bo; _gid=GA1.2.4323791.1684667247; auth=0BkG3DL6fOPr9i5Baou7v3fDvBLQ05wcjkp%2Fv%2FlMXfLXcglPVrlEG0dlNMQ%2Fl%2BrWaUm5UF6ebQSIfNMWvJrDDQ%3D%3D; _gat=1; _pbjs_userid_consent_data=980429639243111; cto_bidid=L1jC2l9zNEF0NERPUmpqbmllaHVWR0JwbUl3aWNvVWslMkZSTDBJa3BZNWtIV0doY0ZWZ1ZaSSUyRm9paVpJT2FUQ2RGV253UnRpR2ZUV3JlRk9ZajBoSU9JQmR2ZkhXaktSSDhLWGlPN21NTHRzTFRtY3clM0Q; cto_bundle=ypl-KV9IYkFwMmR6Y05zRlJFUWtsdTZEQXRsYzFGNmU2VVZEWjlvS1NWUGZRJTJGS0Q2TkdEOFg3QksyRWg2R0l5cEFxSUVtMmJnSWEzOXdKRWM3TWIxSURnSFB0JTJGcWpxWUR5VW15NThXNE1wU1hKUGhYcVR0JTJGJTJGc0JmOEtWODQlMkJ2clZMeGhsSHNsOW9NOGFwamx1TnpQclVGVU9BJTNEJTNE';
 
       const dlPage = await axios.get(`${BASE_URL}${id}`, {
 
