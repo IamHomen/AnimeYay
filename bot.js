@@ -527,7 +527,7 @@ bot.onText(/\/watch (.+)/, async (msg, match) => {
 
         }
 
-    } catch (err) {po
+    } catch (err) {
 
         console.error(err);
 
