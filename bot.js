@@ -630,7 +630,7 @@ bot.onText(/\/download (.+)/, async (msg, match) => {
     
     links.forEach(link => {
 
-      response += `${link.text}\n${link.href}\n\n`;
+      response += `<a href"${link.href}">${link.text}</a>\n`;
 
     });
 
