@@ -629,7 +629,7 @@ const chatId = msg.chat.id;
 
     const links = await scrapeDownload({ id: episodeId });
 
-    const response = links.map(link => `${link.text}: ${link.href}`).join('\n');
+    const response = links.map(link => `${link.text}:\n ${link.href}\n\n`);
 
     bot.sendMessage(chatId, response);
 
