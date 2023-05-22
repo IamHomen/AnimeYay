@@ -626,7 +626,7 @@ bot.onText(/\/download (.+)/, async (msg, match) => {
 
     const links = await scrapeDownload({ id: episodeId });
     const chatId = msg.chat.id;
-    let response = '<b>Download Links</b>\n\n <em>This links expires in couples of hours</em>';
+    let response = '<b>Download Links</b>\n\n <em>This links expires in couples of hours</em>\n\n';
     
     links.forEach(link => {
 
